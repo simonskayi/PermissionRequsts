@@ -10,7 +10,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 
 class MainActivity : AppCompatActivity() {
-    val permissionRequestCode = 99
+    private val permissionRequestCode = 99
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -40,22 +40,22 @@ class MainActivity : AppCompatActivity() {
         }
     }
 /// This is a test function
-    fun showText(){
+private fun showText(){
         Toast.makeText(this, "Permission is Working", Toast.LENGTH_LONG).show()
     }
 
     // Step 1. Check If The Permission Is Already Granted
-    fun hasCameraPermission():Boolean{
+    private fun hasCameraPermission():Boolean{
         return ContextCompat.checkSelfPermission(this,Manifest.permission.CAMERA)==PackageManager.PERMISSION_GRANTED
     }
 
     //Step.2 Create the Permission Request
-    fun requestPermission(){
+    private fun requestPermission(){
         ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA),permissionRequestCode)
     }
 
     // Step 3A. If the User Denies the Permission (Clarify the Permission Again)
-    fun showPermissionRational() = if (ActivityCompat.shouldShowRequestPermissionRationale(this,Manifest.permission.CAMERA)){
+    private fun showPermissionRational() = if (ActivityCompat.shouldShowRequestPermissionRationale(this,Manifest.permission.CAMERA)){
         permissionRational { requestPermission() }
     }
     else{
@@ -63,7 +63,7 @@ class MainActivity : AppCompatActivity() {
     }
 
      // Step 3B. Create a Dialoag to Explain the Need
-    fun permissionRational(positiveAction:()-> Unit){
+     private fun permissionRational(positiveAction:()-> Unit){
         AlertDialog.Builder(this)
             .setTitle("Camera Permission")
             .setMessage("This App Requires Camera To Work")
